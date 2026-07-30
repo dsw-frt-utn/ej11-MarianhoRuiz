@@ -19,55 +19,56 @@ namespace Dsw2026Ej11.Collections;
 public class CasoLinq
 {
     List<Libro> libros = Libro.CrearLista();
-    
-    public string obtenerPrimero()
+
+    public Libro GetPrimero()
     {
-       return libros.FirstOrDefault().ToString();
+       return libros.FirstOrDefault();
     }
 
-    public Libro obtenerUltimo()
+    public Libro GetUltimo()
     {
         return libros.LastOrDefault();
     }
 
-    public decimal sumaPrecios()
+    public decimal GetTotalPrecios()
     {
-        return libros.Sum(a => a.Precio);
+        return libros.Sum(libro => libro.Precio);
     }
 
-    public decimal promedioPrecios()
+    public decimal GetPromedioPrecios()
     {
-        return libros.Average(a => a.Precio);
+        return libros.Average(libro => libro.Precio);
     }
 
-    public List<Libro> GetListById(int id)
+    public List<Libro> GetListById()
     {
-        return libros.FindAll(a => a.Id > id);
+        return libros.Where(libro => libro.Id > 15).ToList();
     }
 
-    public List<string> MostrarLibros()
+    public List<string> GetLibros()
     {
         return libros.Select(libro => $"{libro.Titulo} - {libro.Precio:C}").ToList();
     }
 
-    public decimal GetMayorPrecio()
+    public Libro GetMayorPrecio()
     {
-        return libros.Max(libro => libro.Precio);
+        return libros.MaxBy(libro => libro.Precio);
     }
 
-    public decimal GetMenorPrecio()
+    public Libro GetMenorPrecio()
     {
-        return libros.Min(libro => libro.Precio);
+        return libros.MinBy(libro => libro.Precio);
     }
 
-    public List<Libro> librosMayorPromedio()
+    public List<Libro> GetMayorPromedio()
     {
-        return libros.FindAll(libro => libro.Precio > promedioPrecios());
+        decimal promedio = libros.Average(libro => libro.Precio);
+        return libros.Where(libro => libro.Precio > promedio).ToList();
     }
     
-    public List<Libro> OrdenDescendente()
+    public List<Libro> GetOrdenadosPorTitulo()
     {
-        return libros.OrderByDescending(libro => libro.Precio).ToList();
+        return libros.OrderByDescending(libro => libro.Titulo).ToList();
     }
 
     
