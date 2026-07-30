@@ -32,6 +32,6 @@ public class CasoList
 
     public void eliminarAlumnoPorPoslista(int posicion)
     {
-        eliminarAlumno(Alumnos[posicion]);
+        Alumnos.RemoveAt(posicion);
     }
 }
